@@ -1,0 +1,1373 @@
+{
+	"info": {
+		"_postman_id": "540aef49-aa33-493b-8c2a-20443dc311ab",
+		"name": "BookStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24885227"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Amal\",\r\n    \"password\":\"zxcvbn123\",\r\n    \"email\":\"amal@gmail.com\",\r\n    \"profileImage\":\"test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"tharindu\",\r\n    \"password\":\"qwerty123\",\r\n    \"email\":\"tharindu@gmail.com\",\r\n    \"profileImage\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Register User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"chanaka\",\r\n    \"password\":\"asdfgh123\",\r\n    \"email\":\"chanaka@gmail.com\",\r\n    \"profileImage\":\"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUaGFyaW5kdSIsImlhdCI6MTY5MzMwNzU0NiwiZXhwIjoxNjkzMzkzOTQ2fQ.XaRhiNc6fHcrwtLiZHBsuIXpNecxllGCXixKXaKKVeM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"amal\",\r\n    \"password\":\"zxcvbn123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"tharindu\",\r\n    \"password\":\"qwerty123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "Login User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"chanaka\",\r\n    \"password\":\"asdfgh123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NTYxLCJleHAiOjE2OTMzOTQ5NjF9.MbVYCcvSsKrMrgILKyFLTvgGneTcs-Rt2ntJhrArYg0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NTYxLCJleHAiOjE2OTMzOTQ5NjF9.MbVYCcvSsKrMrgILKyFLTvgGneTcs-Rt2ntJhrArYg0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUaGFyaW5kdSIsImlhdCI6MTY5MzMwNzU0NiwiZXhwIjoxNjkzMzkzOTQ2fQ.XaRhiNc6fHcrwtLiZHBsuIXpNecxllGCXixKXaKKVeM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"Chanaka\",\r\n    \"password\": \"$2a$10$PEtq/wV7/7w0TS/Cvgd9ienOSasHHGo07OguD2BrknEI2c.9eAqp2\",\r\n    \"email\": \"chanaka152@gmail.com\",\r\n    \"profileImage\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUaGFyaW5kdSIsImlhdCI6MTY5MzMwNzU0NiwiZXhwIjoxNjkzMzkzOTQ2fQ.XaRhiNc6fHcrwtLiZHBsuIXpNecxllGCXixKXaKKVeM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"Chanaka\",\r\n    \"password\": \"$2a$10$PEtq/wV7/7w0TS/Cvgd9ienOSasHHGo07OguD2BrknEI2c.9eAqp2\",\r\n    \"email\": \"chanaka152@gmail.com\",\r\n    \"profileImage\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/users/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"title\": \"Assasins Blade\",\r\n        \"author\": \"Sarah J Maas\",\r\n        \"description\": \"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire\",\r\n        \"price\": 250.25,\r\n        \"quantity\": 12,\r\n        \"coverImage\": \"TEST\",\r\n        \"featured\": false,\r\n        \"subCategory\": {\r\n            \"id\":6\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a book",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"title\": \"Assasins Blade\",\r\n        \"author\": \"Sarah J Maas\",\r\n        \"description\": \"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire\",\r\n        \"price\": 250.25,\r\n        \"quantity\": 12,\r\n        \"coverImage\": \"TEST\",\r\n        \"featured\": false,\r\n        \"subCategory\": null,\r\n        \"orders\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"books"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get All Books",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFuYWthIiwiaWF0IjoxNjkzMzEzOTM1LCJleHAiOjE2OTM0MDAzMzV9.3y8JrkNhp5ra7jn699jExfcN7XMRnOMsE_6a2GzEXk8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"The Assassins Blade\",\r\n    \"author\":\"Sarah J Maas\",\r\n    \"description\":\"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire, Sam.WhenCelaena’s scheming master, Arobynn Hamel, dispatches her on missionsthat take her from remote islands to hostile deserts, she finds herselfacting independently of his wishes-and questioning her own allegiance.\",\r\n    \"price\":250.25,\r\n    \"quantity\":12,\r\n    \"coverImage\":\"TEST\",\r\n    \"featured\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/books/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"books",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Book by subcategory Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGFyaW5kdSIsImlhdCI6MTY5MzQxMzYyOCwiZXhwIjoxNjkzNTAwMDI4fQ.livq0rW2YcQAyViioYlkrSUWkO5vjuSc0SBGJvGJNmo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/subcategories/6/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subcategories",
+						"6",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Books by category Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGFyaW5kdSIsImlhdCI6MTY5MzMyMjIzMywiZXhwIjoxNjkzNDA4NjMzfQ.1AIDXcpp9hQudj1bF4yJ_UWZMB1y7v7k4LF1pvLe_ys",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/categories/2/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"categories",
+						"2",
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGFyaW5kdSIsImlhdCI6MTY5MzM3NjU4NywiZXhwIjoxNjkzNDYyOTg3fQ.rUrR83zRR9SMz4ogTelLzkdUEdgkE9Be3D98daKyhGQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quantity\": 5,\r\n        \"id\": 2,\r\n        \"title\": \"Sarasons\",\r\n        \"author\": \"Celaena\",\r\n        \"description\": \"is her kingdom’\",\r\n        \"price\": 267.25,\r\n        \r\n        \"coverImage\": \"TEST\",\r\n        \"featured\": false,\r\n        \"subCategory\": {\r\n            \"id\": 1,\r\n            \"description\": \"Updated series of science textbooks written for students in Pakistan who are studying the Pakistan and UK National Curriculum.\",\r\n            \"subCategoryName\": \"Space\",\r\n            \"category\": {\r\n                \"id\": 1,\r\n                \"description\": \"Written for students in Pakistan who are studying the Pakistan and UK National Curriculum.\",\r\n                \"categoryName\": \"Fiction\"\r\n            }\r\n        },\r\n        \"orders\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/books/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"books",
+						"2"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"Chanaka\",\r\n    \"password\": \"$2a$10$PEtq/wV7/7w0TS/Cvgd9ienOSasHHGo07OguD2BrknEI2c.9eAqp2\",\r\n    \"email\": \"chanaka152@gmail.com\",\r\n    \"profileImage\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/books/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"books",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"Science Fact File Second Edition is an updated series of science textbooks written for students in Pakistan who are studying the Pakistan and UK National Curriculum.\",\r\n    \"categoryName\":\"Science Fiction\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Category",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire\",\r\n    \"categoryName\": \"Novel\"\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get All Categories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"The Assassins Blade\",\r\n    \"author\":\"Sarah J Maas\",\r\n    \"description\":\"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire, Sam.WhenCelaena’s scheming master, Arobynn Hamel, dispatches her on missionsthat take her from remote islands to hostile deserts, she finds herselfacting independently of his wishes-and questioning her own allegiance.\",\r\n    \"price\":250.25,\r\n    \"quantity\":12,\r\n    \"coverImage\":\"TEST\",\r\n    \"featured\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Category by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/books/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"books",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFuYWthIiwiaWF0IjoxNjkzMzEzOTM1LCJleHAiOjE2OTM0MDAzMzV9.3y8JrkNhp5ra7jn699jExfcN7XMRnOMsE_6a2GzEXk8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire\",\r\n    \"categoryName\": \"Novel\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/categories/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"categories",
+						"2"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"Chanaka\",\r\n    \"password\": \"$2a$10$PEtq/wV7/7w0TS/Cvgd9ienOSasHHGo07OguD2BrknEI2c.9eAqp2\",\r\n    \"email\": \"chanaka152@gmail.com\",\r\n    \"profileImage\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/categories/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"categories",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a SubCategory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbWFsIiwiaWF0IjoxNjkzMzEzNzk1LCJleHAiOjE2OTM0MDAxOTV9.uQBZ4DuijHVVbVraS9L96DG1p4DqTqrtijpuJV_lPk8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\":\"Science Fact File Second Edition is an updated series of science textbooks written for students in Pakistan who are studying the Pakistan and UK National Curriculum.\",\r\n    \"subCategoryName\":\"Science Fiction\",\r\n    \"category_id\":{\r\n        \"id\":1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/subcategories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subcategories"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Category",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire\",\r\n    \"subCategoryName\": \"Novel\",\r\n    \"category_id\":2\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/subcategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"subcategories"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get All SubCategories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"The Assassins Blade\",\r\n    \"author\":\"Sarah J Maas\",\r\n    \"description\":\"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire, Sam.WhenCelaena’s scheming master, Arobynn Hamel, dispatches her on missionsthat take her from remote islands to hostile deserts, she finds herselfacting independently of his wishes-and questioning her own allegiance.\",\r\n    \"price\":250.25,\r\n    \"quantity\":12,\r\n    \"coverImage\":\"TEST\",\r\n    \"featured\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/subcategories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subcategories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get SubCategory by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/subcategories/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subcategories",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get SubCategories by Category Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWFsIiwiaWF0IjoxNjkzNDE1NjkwLCJleHAiOjE2OTM1MDIwOTB9.qzG5nMECDLHcwPelENbohzagphY_10sjkekRDTNhDrs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/categories/2/subcategories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"categories",
+						"2",
+						"subcategories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update SubCategory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFuYWthIiwiaWF0IjoxNjkzMzEzOTM1LCJleHAiOjE2OTM0MDAzMzV9.3y8JrkNhp5ra7jn699jExfcN7XMRnOMsE_6a2GzEXk8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"description\": \"Updated National Curriculum.\",\r\n        \"subCategoryName\": \"Fiction\",\r\n        \"category\": null\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/subcategories/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subcategories",
+						"2"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete SubCategory",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"Chanaka\",\r\n    \"password\": \"$2a$10$PEtq/wV7/7w0TS/Cvgd9ienOSasHHGo07OguD2BrknEI2c.9eAqp2\",\r\n    \"email\": \"chanaka152@gmail.com\",\r\n    \"profileImage\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/subcategories/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subcategories",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbWFsIiwiaWF0IjoxNjkzMzEzNzk1LCJleHAiOjE2OTM0MDAxOTV9.uQBZ4DuijHVVbVraS9L96DG1p4DqTqrtijpuJV_lPk8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"createdAt\":\"29.08.2023\",\r\n    \"updatedAt\":\"29.08.2023\",\r\n    \"status\":\"Completed\",\r\n    \"users_id\":2,\r\n    \"books\":null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add a Order",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"createdAt\":\"29.08.2023\",\r\n    \"updatedAt\":\"29.08.2023\",\r\n    \"status\":\"Completed\",\r\n    \"users_id\":2,\r\n    \"books\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Get All Orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGFyaW5kdSIsImlhdCI6MTY5MzQxMzYyOCwiZXhwIjoxNjkzNTAwMDI4fQ.livq0rW2YcQAyViioYlkrSUWkO5vjuSc0SBGJvGJNmo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"The Assassins Blade\",\r\n    \"author\":\"Sarah J Maas\",\r\n    \"description\":\"Celaena Sardothien is her kingdom’s most feared assassin. Though sheworks for the powerful and ruthless Assassin’s Guild, Celaena yields tono one and trusts only her fellow killer for hire, Sam.WhenCelaena’s scheming master, Arobynn Hamel, dispatches her on missionsthat take her from remote islands to hostile deserts, she finds herselfacting independently of his wishes-and questioning her own allegiance.\",\r\n    \"price\":250.25,\r\n    \"quantity\":12,\r\n    \"coverImage\":\"TEST\",\r\n    \"featured\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/orders/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders by user Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGFyaW5kdSIsImlhdCI6MTY5MzQxMzYyOCwiZXhwIjoxNjkzNTAwMDI4fQ.livq0rW2YcQAyViioYlkrSUWkO5vjuSc0SBGJvGJNmo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/users/2/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"2",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjaGFuYWthIiwiaWF0IjoxNjkzMzEzOTM1LCJleHAiOjE2OTM0MDAzMzV9.3y8JrkNhp5ra7jn699jExfcN7XMRnOMsE_6a2GzEXk8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"createdAt\":\"2021-06-29T20:23:42.401693300\",\r\n    \"updatedAt\":\"2021-08-29T20:23:42.401693300\",\r\n    \"status\":\"Pending\",\r\n    \"users_id\":2,\r\n    \"books\":null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/orders/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders",
+						"2"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJDaGFuYWthIiwiaWF0IjoxNjkzMzA4NzY5LCJleHAiOjE2OTMzOTUxNjl9.jYyi9ny3ogQN9prl_KDmmOGl9YV0XdYb1ndLtYkdFpk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"Chanaka\",\r\n    \"password\": \"$2a$10$PEtq/wV7/7w0TS/Cvgd9ienOSasHHGo07OguD2BrknEI2c.9eAqp2\",\r\n    \"email\": \"chanaka152@gmail.com\",\r\n    \"profileImage\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/orders/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
