@@ -9,13 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lk.ijse.bookstore.dto.UserProfileDTO;
 import lk.ijse.bookstore.entity.User;
 import lk.ijse.bookstore.service.UserService;
 
@@ -90,8 +87,8 @@ public class UserController {
         }   
     }
 
-    @PostMapping("/user/{id}/profile")
-    public ResponseEntity<User> updateProfile(@PathVariable Long id, @ModelAttribute UserProfileDTO userProfileDTO) {
-        return new ResponseEntity<User>(userService.updateUser(id, userProfileDTO), HttpStatus.OK);
-    }
+    // @PostMapping("/user/{id}/profile")
+    // public ResponseEntity<User> updateProfile(@PathVariable Long id, @ModelAttribute UserProfileDTO userProfileDTO) {
+    //     return new ResponseEntity<User>(userService.updateUser(id, userProfileDTO), HttpStatus.OK);
+    // }
 }

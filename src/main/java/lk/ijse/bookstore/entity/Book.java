@@ -15,12 +15,27 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
 @Table(name = "books")
 @Data
+@AllArgsConstructor
 public class Book {
+    
+    public Book(String title, String author, String iSBN10, String description, Double price, int quantity) {
+        this.title = title;
+        this.author = author;
+        ISBN10 = iSBN10;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public Book() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,6 +45,9 @@ public class Book {
 
     @Column(nullable = false)
     private String author;
+
+    @Column(nullable = false)
+    private String ISBN10;
 
     @Column(nullable = false)
     private String description;

@@ -9,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import lk.ijse.bookstore.dto.BookCreateDTO;
 import lk.ijse.bookstore.entity.Book;
 import lk.ijse.bookstore.service.BookService;
 
@@ -78,6 +80,18 @@ public class BookController {
         }
     }
 
+    @PutMapping("/bookCoverImage/{id}")
+    public ResponseEntity<Book> updateBookCoverImage(@PathVariable Long id, @ModelAttribute BookCreateDTO bookCreateDTO) {
+        try{
+            return new ResponseEntity<Book>(bookService.updateBookCoverImage(id, bookCreateDTO), HttpStatus.OK);
+        }catch(NoSuchElementException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);            
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+        
+    }
+
     @DeleteMapping("/books/{id}")
     public ResponseEntity<Void> deleteUser (@PathVariable long id){
         try{
@@ -113,4 +127,6 @@ public class BookController {
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }   
     }
+
+    
 }
