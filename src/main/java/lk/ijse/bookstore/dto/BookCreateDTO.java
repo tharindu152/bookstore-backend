@@ -2,6 +2,7 @@ package lk.ijse.bookstore.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import lk.ijse.bookstore.entity.SubCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,6 @@ public class BookCreateDTO {
     private String description;
     private Double price;
     private int quantity;
-    // private boolean featured;
-    // private SubCategory subCategory;
+    private boolean featured;
+    private SubCategory subCategory;
 }
