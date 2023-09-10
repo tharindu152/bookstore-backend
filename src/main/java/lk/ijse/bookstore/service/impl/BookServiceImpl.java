@@ -14,6 +14,7 @@ import lk.ijse.bookstore.dto.BookCreateDTO;
 import lk.ijse.bookstore.entity.Book;
 import lk.ijse.bookstore.repository.BookRepository;
 import lk.ijse.bookstore.service.BookService;
+import lk.ijse.bookstore.util.Validator;
 
 
 
@@ -41,6 +42,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book createBook(Book book) {
+
+        // if(Validator.validateTextFeild(book.getTitle(), uploadDirectory))
+
         Book newBook = new Book(0, book.getTitle(), book.getAuthor(), book.getISBN10(), book.getDescription(), book.getPrice(), book.getQuantity(), "TEST", book.isFeatured(), book.getSubCategory(), null);
 
         return bookRepository.save(newBook);        
