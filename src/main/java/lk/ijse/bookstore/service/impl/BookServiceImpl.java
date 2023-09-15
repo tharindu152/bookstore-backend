@@ -54,13 +54,13 @@ public class BookServiceImpl implements BookService {
     public Book updateBook(Long id, Book book) {
         Book existingBook= getBookById(id);
 
-        existingBook.setTitle(book.getTitle());
-        existingBook.setAuthor(book.getAuthor());
-        existingBook.setISBN10(book.getISBN10());
-        existingBook.setDescription(book.getDescription());
-        existingBook.setPrice(book.getPrice());
+        // existingBook.setTitle(book.getTitle());
+        // existingBook.setAuthor(book.getAuthor());
+        // existingBook.setISBN10(book.getISBN10());
+        // existingBook.setDescription(book.getDescription());
+        // existingBook.setPrice(book.getPrice());
         existingBook.setQuantity(book.getQuantity());
-        existingBook.setSubCategory(book.getSubCategory());
+        // existingBook.setSubCategory(book.getSubCategory());
 
         return bookRepository.save(existingBook);
     }
