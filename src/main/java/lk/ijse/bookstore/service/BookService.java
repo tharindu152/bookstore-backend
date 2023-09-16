@@ -11,7 +11,7 @@ import lk.ijse.bookstore.entity.Book;
 public interface BookService {
     List<Book> getAllBooks();
     Book getBookById(Long id);
-    Book createBook(Book book);
+    Book createBook(Book book) throws Exception;
     Book updateBook(Long id, Book book);
     Book updateBookCoverImage(Long id, BookCreateDTO bookCreateDTO);
     void deleteBook(Long id);

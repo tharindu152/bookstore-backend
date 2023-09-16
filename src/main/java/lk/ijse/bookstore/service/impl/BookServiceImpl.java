@@ -41,9 +41,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book createBook(Book book) {
+    public Book createBook(Book book) throws Exception {
 
-        // if(Validator.validateTextFeild(book.getTitle(), uploadDirectory))
+        if(!Validator.validateTextFeild(book.getTitle(), "^[A-Za-z0-9\\s.,!?()-:;'\"&]+$")) throw new Exception("Invalid Book Titile");        
+        if(!Validator.validateTextFeild(book.getAuthor(), "^[A-Za-z\\s.'-]+$")) throw new Exception("Invalid Author Name");
+        if(!Validator.validateTextFeild(book.getISBN10(), "^(?:\\d{9}[\\d|X]|\\d{13})$|^(?:\\d{1,5}[-\\s]\\d{1,7}[-\\s]\\d{1,6}[-\\s][\\d|X])$|^(?:\\d{3}[-\\s]\\d{1,5}[-\\s]\\d{1,7}[-\\s][\\d|X])$")) throw new Exception("Invalid ISBN");
+        if(!Validator.validateTextFeild(book.getDescription(), "^[\\s\\S]*$")) throw new Exception("Invalid description");
+        if(!Validator.validateTextFeild(book.getPrice(), "^\\d+(\\.\\d{1,2})?$")) throw new Exception("Invalid price");
+        if(!Validator.validateTextFeild(book.getQuantity(), "^[1-9]\\d*$")) throw new Exception("Invalid quantity");
 
         Book newBook = new Book(0, book.getTitle(), book.getAuthor(), book.getISBN10(), book.getDescription(), book.getPrice(), book.getQuantity(), "TEST", book.isFeatured(), book.getSubCategory(), null);
 

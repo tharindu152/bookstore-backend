@@ -17,4 +17,20 @@ public class Validator {
     
     }
 
+    public static boolean validateTextFeild(Number input, String pattern){
+        String stringInput = input.toString();
+        String text = stringInput.strip();
+
+        if (text.isEmpty()) {
+            return false;
+        }
+
+        if (!text.matches(pattern)) {
+            return false;
+        }
+
+        return true;
+    
+    }
+
 }   
