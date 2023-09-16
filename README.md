@@ -1,4 +1,4 @@
-# My App
+# Online Bookstore App
 
 ### Version
 
@@ -7,4 +7,4 @@
 ### License
 
 Copyright ©️ 2023 Tharindu Thennakoon <br>
-This project is licensed under this [License](License.txt)
+This project is licensed under [MIT License](License.txt)
