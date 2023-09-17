@@ -49,7 +49,7 @@ public class Book {
     @Column(nullable = false)
     private String ISBN10;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1500)
     private String description;
 
     @Column(nullable = false)
