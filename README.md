@@ -17,7 +17,9 @@ The REST API for the mentioned web application was coded using technologies such
 - MySQL
   <br>
 
-Layered Architecture was followed to structure the project. Displayed below is the ER Diagram used to map the relational data base.
+Layered Architecture was followed to structure the project. Displayed below is the ER Diagram used to map the relational databases.
+
+<img src="/src/main/resources/img/ER_Digram.png">
 
 ### License
 
