@@ -16,7 +16,8 @@ The REST API for the mentioned web application was coded using technologies such
 - JWT tokens
 - MySQL
   <br>
-  Layered Architecture was followed to structure the project. Displayed below is the ER Diagram used to map the relational data base.
+
+Layered Architecture was followed to structure the project. Displayed below is the ER Diagram used to map the relational data base.
 
 ### License
 
