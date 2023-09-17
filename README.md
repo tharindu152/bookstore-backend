@@ -19,7 +19,7 @@ The REST API for the mentioned web application was coded using technologies such
 
 Layered Architecture was followed to structure the project. Displayed below is the ER Diagram used to map the relational databases.
 
-<img src="/src/main/resources/img/ER_Digram.png">
+<img src="https://github.com/tharindu152/bookstore-backend/blob/master/src/main/resources/img/ER_Digram.png">
 
 ### License
 
