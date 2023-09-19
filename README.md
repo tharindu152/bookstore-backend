@@ -27,7 +27,7 @@ Layered Architecture was followed to structure the project. API end points were 
 - Unzip it to a preferred location in your computer
 - Open the project folder using terminal
 - type the undermentioned command and press enter
-  -- mvn spring-boot:run
+  - mvn spring-boot:run
 
 ### License
 
