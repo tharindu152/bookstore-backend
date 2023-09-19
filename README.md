@@ -11,7 +11,7 @@ The REST API for the mentioned web application was coded using technologies such
 
 - Java
 - Spring boot
-- JPA hibernate
+- Hibernate
 - Lombok
 - JWT tokens
 - MySQL
