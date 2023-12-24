@@ -3,8 +3,8 @@ package lk.ijse.bookstore.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import lk.ijse.bookstore.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import lk.ijse.bookstore.entity.User;
@@ -20,9 +20,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Value("${upload.directory}")
-    private String uploadDirectory;
-
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -34,19 +31,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
-
+    public User saveUser(UserDTO userDTO) {
+        User user = new User(userDTO.getName(), userDTO.getCountry(), userDTO.getStreet(), userDTO.getCity(),
+                userDTO.getState(), userDTO.getZipCode(), userDTO.getMobileNumber(), userDTO.getEmail());
         return userRepository.save(user);
     }
 
     @Override
-    public User updateUser(Long id, User user) {
-        User existingUser = getUserById(id);
+    public User updateUser(Long id, UserDTO userDTO) {
+        User existingUser;
+        if(userRepository.existsById(id)){
+            existingUser = getUserById(id);
 
-        existingUser.setUsername(user.getUsername());
-        existingUser.setEmail(user.getEmail());
-        // existingUser.setPassword(user.getPassword());
-
+            existingUser.setName(userDTO.getName());
+            existingUser.setCountry(userDTO.getCountry());
+            existingUser.setStreet(userDTO.getStreet());
+            existingUser.setCity(userDTO.getCity());
+            existingUser.setState(userDTO.getState());
+            existingUser.setZipCode(userDTO.getZipCode());
+            existingUser.setMobileNumber(userDTO.getMobileNumber());
+            existingUser.setEmail(userDTO.getMobileNumber());
+        }else{
+            throw new NoSuchElementException("User ID: " + id + " not found");
+        }
         return userRepository.save(existingUser);
     } 
     

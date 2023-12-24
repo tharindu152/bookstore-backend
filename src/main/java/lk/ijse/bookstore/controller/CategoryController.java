@@ -3,36 +3,36 @@ package lk.ijse.bookstore.controller;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import lk.ijse.bookstore.dto.CategoryDTO;
+import lk.ijse.bookstore.entity.Book;
+import lk.ijse.bookstore.entity.SubCategory;
+import lk.ijse.bookstore.service.BookService;
+import lk.ijse.bookstore.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import lk.ijse.bookstore.entity.Category;
 import lk.ijse.bookstore.service.CategoryService;
 
-
-
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("api/v2/categories")
 public class CategoryController {
     private CategoryService categoryService;
+    private BookService bookService;
+    private SubCategoryService subCategoryService;
 
     @Autowired
-    public CategoryController (CategoryService categoryService){
+    public CategoryController (CategoryService categoryService, BookService bookService, SubCategoryService subCategoryService){
         this.categoryService = categoryService;
+        this.bookService = bookService;
+        this.subCategoryService = subCategoryService;
     }
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<Category>> getAllCategories () {
         try{
             List<Category> categories = categoryService.getAllCategories();
@@ -44,7 +44,7 @@ public class CategoryController {
         }   
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}", produces = "application/json")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
         
         try{
@@ -58,21 +58,21 @@ public class CategoryController {
 
     }
 
-    @PostMapping
-    public ResponseEntity<Category> save(@RequestBody Category category){
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Category> saveCategory(@RequestBody @Validated CategoryDTO categoryDTO){
         try{
-            Category categoryCreated = categoryService.createCategory(category);
+            Category categoryCreated = categoryService.createCategory(categoryDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(categoryCreated);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Category> update (@PathVariable long id, @RequestBody Category category){
+    @PatchMapping(path = "/{id}", consumes = "application/json")
+    public ResponseEntity<Category> updateCategory (@PathVariable long id, @RequestBody @Validated CategoryDTO categoryDTO){
         try{
-            Category updatedCategory = categoryService.updateCategory(id, category);
-            return ResponseEntity.status(HttpStatus.OK).body(updatedCategory);
+            Category updatedCategory = categoryService.updateCategory(id, categoryDTO);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         } catch (NoSuchElementException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);            
         } catch (Exception e){
@@ -81,12 +81,37 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser (@PathVariable long id){
+    public ResponseEntity<Void> deleteCategory (@PathVariable long id){
         try{
             categoryService.deleteCategory(id);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
         } catch (NoSuchElementException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }   
+    }
+
+    @GetMapping(path = "/{catId}/books", produces = "application/json")
+    public ResponseEntity<List<Book>> getBooksByCategoryId (@PathVariable Long catId) {
+        try{
+            List<Book> books = bookService.getBooksByCategoryId(catId);
+            return ResponseEntity.status(HttpStatus.OK).body(books);
+        }catch (NoSuchElementException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @GetMapping(path = "/{catId}/subcategories", produces = "application/json")
+    public ResponseEntity<List<SubCategory>> getSubCategoriesByCategoryId (@PathVariable Long catId) {
+        try{
+            List<SubCategory> subCategories = subCategoryService.getSubCategoriesByCategoryId(catId);
+            System.out.println(subCategories);
+            return ResponseEntity.status(HttpStatus.OK).body(subCategories);
+        }catch (NoSuchElementException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

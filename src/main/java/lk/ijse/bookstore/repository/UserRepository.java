@@ -1,16 +1,15 @@
 package lk.ijse.bookstore.repository;
 
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import lk.ijse.bookstore.entity.User;
-
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface UserRepository extends JpaRepository<User , Long>{
-    //Custom queries
-    Optional<User> findByUsername(String username);
-    Boolean existsByUsername(String username);
-    Boolean existsByEmail(String email);
+
+    @Query("SELECT u FROM User u WHERE u.id = :userId")
+    User getUserById(@Param("userId") Long userId);
 
 }

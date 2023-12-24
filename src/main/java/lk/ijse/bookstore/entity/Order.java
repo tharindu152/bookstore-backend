@@ -1,61 +1,59 @@
 package lk.ijse.bookstore.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
 @Data
-@Table(name = "orders")
-public class Order {
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "`order`")
+public class Order implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-    
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updateAt;
+    @Column(length = 50, nullable = false)
     private String status;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "users_id")
+
+    @ManyToMany
+    @JoinTable(name = "order_book",
+    joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    private Set<Book> bookSet;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private User user;
 
-    @ManyToMany(mappedBy = "orders")
-    private Set<Book> books = new HashSet<>();
+    public Order(LocalDateTime createdAt, LocalDateTime updateAt, String status, Set<Book> bookSet, User user) {
+        this.createdAt = createdAt;
+        this.updateAt = updateAt;
+        this.status = status;
+        this.bookSet = bookSet;
+        this.user = user;
+    }
 
     @PrePersist
     protected void onCreate(){
         this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }   
+        this.updateAt = LocalDateTime.now();
+    }
 
     @PreUpdate
     protected void onUpdate(){
-        this.updatedAt = LocalDateTime.now();
+        this.updateAt = LocalDateTime.now();
     }
-
-    @OneToOne
-    @JoinColumn(name = "shippingDetails_id")
-    private ShippingDetails shippingDetails;
-
 
 }

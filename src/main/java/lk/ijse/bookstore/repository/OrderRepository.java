@@ -11,6 +11,6 @@ import lk.ijse.bookstore.entity.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    @Query("SELECT order FROM Order order WHERE order.user.id = :userId")
-    List<Order> findOrderByUserId(@Param("userId") Long userId);    
+    @Query("SELECT o FROM Order o WHERE o.user.id = :userId")
+    List<Order> getOrderByUserId(@Param("userId") Long userId);
 }

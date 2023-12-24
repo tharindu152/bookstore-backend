@@ -2,16 +2,17 @@ package lk.ijse.bookstore.service;
 
 import java.util.List;
 
+import lk.ijse.bookstore.dto.OrderDTO;
 import org.springframework.stereotype.Service;
 
 import lk.ijse.bookstore.entity.Order;
 
 @Service
 public interface OrderService {
-    List<Order> getAllorders();
+    List<Order> getAllOrders();
     Order getOrderById(Long id);
-    Order createOrder(Order order);
-    Order updateOrder(Long id, Order order);
+    Order createOrder(OrderDTO orderDTO);
+    Order updateOrder(Long id, OrderDTO orderDTO);
     void deleteOrder(Long id);
-    List<Order> findOrderByUserId(Long userId);
+    List<Order> getOrderByUserId(Long userId);
 }

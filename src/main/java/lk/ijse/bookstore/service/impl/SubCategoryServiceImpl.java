@@ -3,6 +3,9 @@ package lk.ijse.bookstore.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import lk.ijse.bookstore.dto.SubCategoryDTO;
+import lk.ijse.bookstore.entity.Category;
+import lk.ijse.bookstore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +17,12 @@ import lk.ijse.bookstore.service.SubCategoryService;
 @Service
 public class SubCategoryServiceImpl implements SubCategoryService{
     private SubCategoryRepository subCategoryRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    public SubCategoryServiceImpl (SubCategoryRepository subCategoryRepository){
+    public SubCategoryServiceImpl (SubCategoryRepository subCategoryRepository, CategoryRepository categoryRepository){
         this.subCategoryRepository = subCategoryRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -31,17 +36,28 @@ public class SubCategoryServiceImpl implements SubCategoryService{
     }
 
     @Override
-    public SubCategory createSubCategory(SubCategory subCategory) {
-        return subCategoryRepository.save(subCategory);
+    public SubCategory createSubCategory(SubCategoryDTO subCategoryDTO) {
+        Category category = categoryRepository.getCategoryBySubCategoryId(Long.valueOf(subCategoryDTO.getCategoryId()));
+        if(category != null){
+            SubCategory subCategory = new SubCategory(subCategoryDTO.getDescription(), subCategoryDTO.getSubCatName(), category);
+            return subCategoryRepository.save(subCategory);
+        }else {
+            throw new NoSuchElementException("Category ID: " + subCategoryDTO.getCategoryId() + " not found");
+        }
     }
 
     @Override
-    public SubCategory updateSubCategory(Long id, SubCategory subCategory) {
-        SubCategory existingSubCategory= getSubCategoryById(id);
+    public SubCategory updateSubCategory(Long id, SubCategoryDTO subCategoryDTO) {
+        SubCategory existingSubCategory;
 
-        existingSubCategory.setSubCategoryName(subCategory.getSubCategoryName());
-        existingSubCategory.setDescription(subCategory.getDescription());
-        existingSubCategory.setCategory(subCategory.getCategory());
+        if(subCategoryRepository.existsById(id)){
+            existingSubCategory= getSubCategoryById(id);
+
+            existingSubCategory.setSubCatName(subCategoryDTO.getSubCatName());
+            existingSubCategory.setDescription(subCategoryDTO.getDescription());
+        }else{
+            throw new NoSuchElementException("SubCategory ID: " + id + " not found");
+        }
 
         return subCategoryRepository.save(existingSubCategory);
     }

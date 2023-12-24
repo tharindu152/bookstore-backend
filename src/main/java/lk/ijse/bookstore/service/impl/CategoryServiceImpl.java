@@ -3,6 +3,7 @@ package lk.ijse.bookstore.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import lk.ijse.bookstore.dto.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,16 +33,23 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public Category createCategory(Category category) {
+    public Category createCategory(CategoryDTO categoryDTO) {
+        Category category = new Category(categoryDTO.getCatName(), categoryDTO.getDescription());
         return categoryRepository.save(category);
     }
 
     @Override
-    public Category updateCategory(Long id, Category category) {
-        Category existingCategory= getCategoryById(id);
+    public Category updateCategory(Long id, CategoryDTO categoryDTO) {
+        Category existingCategory;
 
-        existingCategory.setCategoryName(category.getCategoryName());
-        existingCategory.setDescription(category.getDescription());
+        if(categoryRepository.existsById(id)){
+            existingCategory= getCategoryById(id);
+
+            existingCategory.setCatName(categoryDTO.getCatName());
+            existingCategory.setDescription(categoryDTO.getDescription());
+        }else{
+            throw new NoSuchElementException("Category ID " + id + " not found");
+        }
 
         return categoryRepository.save(existingCategory);
     }

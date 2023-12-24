@@ -3,6 +3,10 @@ package lk.ijse.bookstore.service.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import lk.ijse.bookstore.dto.OrderDTO;
+import lk.ijse.bookstore.entity.User;
+import lk.ijse.bookstore.repository.BookRepository;
+import lk.ijse.bookstore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +20,19 @@ import lk.ijse.bookstore.service.OrderService;
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
+    private UserRepository userRepository;
+
+    private BookRepository bookRepository;
 
     @Autowired
-    public OrderServiceImpl (OrderRepository orderRepository) {
+    public OrderServiceImpl (OrderRepository orderRepository, UserRepository userRepository, BookRepository bookRepository) {
         this.orderRepository = orderRepository;
+        this.userRepository = userRepository;
+        this.bookRepository = bookRepository;
     }   
 
     @Override
-    public List<Order> getAllorders() {
+    public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
@@ -33,16 +42,35 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order createOrder(Order order) {
+    public Order createOrder(OrderDTO orderDTO) {
+        User user = userRepository.getUserById(Long.valueOf(orderDTO.getUserId()));
+
+        Order order = new Order(orderDTO.getCreatedAt(), orderDTO.getUpdateAt(), orderDTO.getStatus(), orderDTO.getBookSet(), user);
         return orderRepository.save(order);
     }
 
     @Override
-    public Order updateOrder(Long id, Order order) {
-        Order existingOrder = getOrderById(id);
+    public Order updateOrder(Long id, OrderDTO orderDTO) {
+        Order existingOrder;
 
-        existingOrder.setUpdatedAt(order.getUpdatedAt());
-        existingOrder.setStatus(order.getStatus());
+        if(orderRepository.existsById(id)){
+            existingOrder = getOrderById(id);
+
+            existingOrder.setUpdateAt(orderDTO.getUpdateAt());
+            existingOrder.setStatus(orderDTO.getStatus());
+
+            // TODO: 2023-12-25 Create ordered book set and add to order
+            existingOrder.setBookSet(orderDTO.getBookSet());
+
+            User user = userRepository.getUserById(Long.valueOf(orderDTO.getUserId()));
+            if(user != null){
+                existingOrder.setUser(user);
+            }else {
+                throw new NoSuchElementException("User not found");
+            }
+        } else{
+            throw new NoSuchElementException("Order ID " + id + " not found");
+        }
 
         return orderRepository.save(existingOrder);
     }
@@ -57,8 +85,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findOrderByUserId(Long userId) {
-        return orderRepository.findOrderByUserId(userId);
+    public List<Order> getOrderByUserId(Long userId) {
+        return orderRepository.getOrderByUserId(userId);
     }
     
 }

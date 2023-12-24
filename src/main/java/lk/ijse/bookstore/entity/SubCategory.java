@@ -1,43 +1,40 @@
 package lk.ijse.bookstore.entity;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Set;
 
-import org.aspectj.weaver.bcel.UnwovenClassFile.ChildClass;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "subcategories")
-@Getter
-@Setter
-public class SubCategory {
+@Table(name = "sub_category")
+public class SubCategory implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(length = 250, nullable = false)
     private String description;
+    @Column(name = "sub_cat_name", length = 250, nullable = false)
+    private String subCatName;
 
-    @Column(nullable = false)
-    private String subCategoryName;
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Setter(AccessLevel.NONE)
+    private Set<Book> bookSet;
 
-    // @OneToMany(mappedBy = "subCategory", cascade =CascadeType.ALL)
-    // private List<Book> books;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
+    @ManyToOne
+    @JoinColumn(name = "cat_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
     private Category category;
-    
+
+    public SubCategory(String description, String subCatName, Category category) {
+        this.description = description;
+        this.subCatName = subCatName;
+        this.category = category;
+    }
 }

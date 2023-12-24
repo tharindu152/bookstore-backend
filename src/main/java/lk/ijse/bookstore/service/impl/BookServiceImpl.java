@@ -1,37 +1,42 @@
 package lk.ijse.bookstore.service.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
+import com.google.cloud.storage.Storage;
+import lk.ijse.bookstore.entity.SubCategory;
+import lk.ijse.bookstore.repository.SubCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import lk.ijse.bookstore.dto.BookCreateDTO;
+import lk.ijse.bookstore.dto.BookDTO;
 import lk.ijse.bookstore.entity.Book;
 import lk.ijse.bookstore.repository.BookRepository;
 import lk.ijse.bookstore.service.BookService;
-import lk.ijse.bookstore.util.Validator;
-
 
 
 @Service
 public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
+    private SubCategoryRepository subCategoryRepository;
+
+    private final Bucket bucket;
 
     @Autowired
-    public BookServiceImpl (BookRepository bookRepository){
+    public BookServiceImpl (BookRepository bookRepository, SubCategoryRepository subCategoryRepository, Bucket bucket){
         this.bookRepository = bookRepository;
+        this.subCategoryRepository = subCategoryRepository;
+        this.bucket = bucket;
     }
 
-    @Value("${upload.directory}")
-    private String uploadDirectory;
 
     @Override
     public List<Book> getAllBooks() {
+
         return bookRepository.findAll();
     }
 
@@ -41,62 +46,73 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book createBook(Book book) throws Exception {
+    public Book createBook(BookDTO bookReqDTO) throws Exception {
+        SubCategory subCategory = subCategoryRepository.findSubCategoriesBySubCategoryId(Long.valueOf(bookReqDTO.getSubCategoryId()));
+        Book newBook = null;
 
-        if(!Validator.validateTextFeild(book.getTitle(), "^[A-Za-z0-9\\s.,!?()-:;'\"&]+$")) throw new Exception("Invalid Book Titile");        
-        if(!Validator.validateTextFeild(book.getAuthor(), "^[A-Za-z\\s.'-]+$")) throw new Exception("Invalid Author Name");
-        if(!Validator.validateTextFeild(book.getISBN10(), "^(?:\\d{9}[\\d|X]|\\d{13})$|^(?:\\d{1,5}[-\\s]\\d{1,7}[-\\s]\\d{1,6}[-\\s][\\d|X])$|^(?:\\d{3}[-\\s]\\d{1,5}[-\\s]\\d{1,7}[-\\s][\\d|X])$")) throw new Exception("Invalid ISBN");
-        if(!Validator.validateTextFeild(book.getDescription(), "^[\\s\\S]*$")) throw new Exception("Invalid description");
-        if(!Validator.validateTextFeild(book.getPrice(), "^\\d+(\\.\\d{1,2})?$")) throw new Exception("Invalid price");
-        if(!Validator.validateTextFeild(book.getQuantity(), "^[1-9]\\d*$")) throw new Exception("Invalid quantity");
-
-        Book newBook = new Book(0, book.getTitle(), book.getAuthor(), book.getISBN10(), book.getDescription(), book.getPrice(), book.getQuantity(), "TEST", book.isFeatured(), book.getSubCategory(), null);
-
-        return bookRepository.save(newBook);        
-    }
-
-    @Override
-    public Book updateBook(Long id, Book book) {
-        Book existingBook= getBookById(id);
-
-        // existingBook.setTitle(book.getTitle());
-        // existingBook.setAuthor(book.getAuthor());
-        // existingBook.setISBN10(book.getISBN10());
-        // existingBook.setDescription(book.getDescription());
-        // existingBook.setPrice(book.getPrice());
-        existingBook.setQuantity(book.getQuantity());
-        // existingBook.setSubCategory(book.getSubCategory());
-
-        return bookRepository.save(existingBook);
-    }
-
-    @Override
-    public Book updateBookCoverImage(Long id, BookCreateDTO bookCreateDTO) {
-        Book existingBook= getBookById(id);
-
-        if(existingBook != null) {
-            
-            MultipartFile file = bookCreateDTO.getCoverImage();
-            String filename = file.getOriginalFilename();
-            String filePath = uploadDirectory + File.separator + filename;
-
-            try {
-                file.transferTo(new File(filePath));
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {            
-                e.printStackTrace();
+        if(subCategory != null){
+            String coverImage = "coverImage-" + bookReqDTO.getIsbn();
+            String coverImageUrl = null;
+            if(bookReqDTO.getCoverImage() != null && !bookReqDTO.getCoverImage().isEmpty()){
+                Blob blob = bucket.create(coverImage, bookReqDTO.getCoverImage().getInputStream(), bookReqDTO.getCoverImage().getContentType());
+                coverImageUrl = blob.signUrl(1, TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString();
+            }else {
+                throw new NoSuchElementException("Book Cover image: " + bookReqDTO.getCoverImage() + " not found");
             }
 
-            existingBook.setCoverImage(filename);
-            return bookRepository.save(existingBook);
+            newBook = new Book( bookReqDTO.getAuthor(), bookReqDTO.getTitle(), coverImageUrl, bookReqDTO.getQuantity(), bookReqDTO.getPrice(),
+                    bookReqDTO.getDescription(), bookReqDTO.getIsbn(), subCategory);
+            return bookRepository.save(newBook);
+        } else {
+            throw new NoSuchElementException("Book SubCategory " + bookReqDTO.getSubCategoryId() + " not found");
         }
-        return null;
+    }
+
+    @Override
+    public Book updateBook(Long id, BookDTO bookReqDTO) throws IOException {
+        Book existingBook;
+        String oldPicture;
+        String newPicture = null;
+        if(bookRepository.existsById(id)){
+            existingBook = getBookById(id);
+            existingBook.setAuthor(bookReqDTO.getAuthor());
+            existingBook.setTitle(bookReqDTO.getTitle());
+
+            String pictureUrl = null;
+            if(bookReqDTO.getCoverImage() != null && !bookReqDTO.getCoverImage().isEmpty()){
+                oldPicture = "coverImage-" + existingBook.getIsbn();
+                newPicture = "coverImage-" + bookReqDTO.getIsbn();
+                if(bucket.get(oldPicture) != null){
+                    bucket.get(oldPicture).delete();
+                    Blob blob = bucket.create(newPicture, bookReqDTO.getCoverImage().getInputStream(), bookReqDTO.getCoverImage().getContentType());
+                    pictureUrl = blob.signUrl(1, TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString();
+                } else {
+                    throw new NoSuchElementException("Old cover image  " + oldPicture + " not found");
+                }
+            } else {
+                throw new NoSuchElementException("New cover image  " + newPicture + " not found");
+            }
+            existingBook.setCoverImage(pictureUrl);
+            existingBook.setQty(bookReqDTO.getQuantity());
+            existingBook.setPrice(bookReqDTO.getPrice());
+            existingBook.setDescription(bookReqDTO.getDescription());
+            existingBook.setIsbn(bookReqDTO.getIsbn());
+
+            SubCategory subCategory = subCategoryRepository.findSubCategoriesBySubCategoryId(Long.valueOf(bookReqDTO.getSubCategoryId()));
+            existingBook.setSubCategory(subCategory);
+        }else{
+            throw new NoSuchElementException("Book ID " + id + " not found");
+        }
+        return bookRepository.save(existingBook);
     }
 
     @Override
     public void deleteBook(Long id) {
         if(bookRepository.existsById(id)){
+            Book book = bookRepository.findBookById(id);
+            String coverImage = book.getCoverImage();
+            System.out.println(coverImage);
+            if (coverImage != null) bucket.get(coverImage).delete();
             bookRepository.deleteById(id);
         }else{
             throw new NoSuchElementException("Book ID " + id + " not found");
@@ -112,4 +128,11 @@ public class BookServiceImpl implements BookService {
     public List<Book> getBooksBySubCategoryId(Long subCategoryId) {
         return bookRepository.findBooksBySubCategoryId(subCategoryId);
     }
+
+//    @Override
+//    public List<Book> getBooksByQuery(String query) {
+//        return bookRepository.findBooksByQuery(query);
+//    }
+
+
 }

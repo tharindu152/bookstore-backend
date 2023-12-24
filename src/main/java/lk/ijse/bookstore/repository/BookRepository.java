@@ -13,14 +13,14 @@ import lk.ijse.bookstore.entity.Book;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("SELECT book FROM Book book WHERE book.subCategory.id = :subCategoryId") //SELECT * FROM items WHERE category_id = :categoryId
-    List<Book> findBooksBySubCategoryId(@Param("subCategoryId") Long categoryId);
+    @Query("SELECT b FROM Book b WHERE b.subCategory.id = :subCategoryId") //SELECT * FROM book WHERE category_id = :categoryId
+    List<Book> findBooksBySubCategoryId(@Param("subCategoryId") Long subCategoryId);
 
-    @Query("SELECT book FROM Book book WHERE book.subCategory.category.id = :CategoryId") //SELECT * FROM books INNER JOIN subCategories ON books.id=subcategories WHERE category_id = :categoryId
-    List<Book> findBooksByCategoryId(@Param("CategoryId") Long categoryId);
+    @Query("SELECT b FROM Book b WHERE b.subCategory.category.id = :categoryId") //SELECT * FROM books INNER JOIN subCategories ON books.id=subcategories WHERE category_id = :categoryId
+    List<Book> findBooksByCategoryId(@Param("categoryId") Long categoryId);
 
-//     UPDATE customer SET name=?, address=?, salary=? WHERE id=?
+    @Query("SELECT b FROM Book b WHERE b.id = :bookId")
+    Book findBookById(@Param("bookId") Long bookId);
 
-// Eg- UPDATE customer SET name=’Kamal’, address=’Colombo’, salary=20000.00 WHERE id=1
 
 }

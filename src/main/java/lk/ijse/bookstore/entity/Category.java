@@ -1,33 +1,35 @@
 package lk.ijse.bookstore.entity;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "categories")
-@Getter
-@Setter
-public class Category {
+@Table(name = "category")
+public class Category implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    @Column(length = 250, nullable = false)
     private String description;
+    @Column(name = "cat_name", length = 250, nullable = false)
+    private String catName;
 
-    @Column(nullable = false)
-    private String categoryName; 
-    
-    // @OneToMany(mappedBy = "subCategory", cascade =CascadeType.ALL)
-    // private List<SubCategory> subCategories;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Setter(AccessLevel.NONE)
+    private Set<SubCategory> subCategorySet;
+
+    public Category( String description, String catName) {
+        this.description = description;
+        this.catName = catName;
+    }
 }

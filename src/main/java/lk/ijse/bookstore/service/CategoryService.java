@@ -2,6 +2,7 @@ package lk.ijse.bookstore.service;
 
 import java.util.List;
 
+import lk.ijse.bookstore.dto.CategoryDTO;
 import org.springframework.stereotype.Service;
 
 import lk.ijse.bookstore.entity.Category;
@@ -10,7 +11,7 @@ import lk.ijse.bookstore.entity.Category;
 public interface CategoryService  {
     List<Category> getAllCategories();
     Category getCategoryById(Long id);
-    Category createCategory(Category category);
-    Category updateCategory(Long id, Category category);
+    Category createCategory(CategoryDTO categoryDTO);
+    Category updateCategory(Long id, CategoryDTO categoryDTO);
     void deleteCategory(Long id);
 }
