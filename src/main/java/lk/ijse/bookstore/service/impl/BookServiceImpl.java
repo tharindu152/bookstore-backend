@@ -51,7 +51,7 @@ public class BookServiceImpl implements BookService {
         Book newBook = null;
 
         if(subCategory != null){
-            String coverImage = "coverImage-" + bookReqDTO.getIsbn();
+            String coverImage = bookReqDTO.getTitle() + "-" + bookReqDTO.getIsbn();
             String coverImageUrl = null;
             if(bookReqDTO.getCoverImage() != null && !bookReqDTO.getCoverImage().isEmpty()){
                 Blob blob = bucket.create(coverImage, bookReqDTO.getCoverImage().getInputStream(), bookReqDTO.getCoverImage().getContentType());
@@ -80,8 +80,8 @@ public class BookServiceImpl implements BookService {
 
             String pictureUrl = null;
             if(bookReqDTO.getCoverImage() != null && !bookReqDTO.getCoverImage().isEmpty()){
-                oldPicture = "coverImage-" + existingBook.getIsbn();
-                newPicture = "coverImage-" + bookReqDTO.getIsbn();
+                oldPicture = existingBook.getTitle() + "-" + existingBook.getIsbn();
+                newPicture = bookReqDTO.getTitle() + "-" + bookReqDTO.getIsbn();
                 if(bucket.get(oldPicture) != null){
                     bucket.get(oldPicture).delete();
                     Blob blob = bucket.create(newPicture, bookReqDTO.getCoverImage().getInputStream(), bookReqDTO.getCoverImage().getContentType());

@@ -39,7 +39,7 @@ public class SubCategoryServiceImpl implements SubCategoryService{
     public SubCategory createSubCategory(SubCategoryDTO subCategoryDTO) {
         Category category = categoryRepository.getCategoryBySubCategoryId(Long.valueOf(subCategoryDTO.getCategoryId()));
         if(category != null){
-            SubCategory subCategory = new SubCategory(subCategoryDTO.getDescription(), subCategoryDTO.getSubCatName(), category);
+            SubCategory subCategory = new SubCategory( subCategoryDTO.getSubCatName(), subCategoryDTO.getDescription(), category);
             return subCategoryRepository.save(subCategory);
         }else {
             throw new NoSuchElementException("Category ID: " + subCategoryDTO.getCategoryId() + " not found");

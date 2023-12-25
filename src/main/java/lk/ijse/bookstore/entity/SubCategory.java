@@ -16,10 +16,10 @@ public class SubCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(length = 250, nullable = false)
-    private String description;
     @Column(name = "sub_cat_name", length = 250, nullable = false)
     private String subCatName;
+    @Column(length = 750, nullable = false)
+    private String description;
 
     @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
@@ -32,7 +32,7 @@ public class SubCategory implements Serializable {
     @JsonBackReference
     private Category category;
 
-    public SubCategory(String description, String subCatName, Category category) {
+    public SubCategory(String subCatName, String description,  Category category) {
         this.description = description;
         this.subCatName = subCatName;
         this.category = category;

@@ -1,9 +1,6 @@
 package lk.ijse.bookstore.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lk.ijse.bookstore.entity.Book;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,8 +23,8 @@ public class OrderDTO implements Serializable {
     @NotBlank
     @Pattern(regexp = "^(completed|pending)", flags = Pattern.Flag.CASE_INSENSITIVE, message = "Invalid order status")
     private String status;
-    @NotNull
-    private Set<Book> bookSet;
+    @NotEmpty(message = "Book set of the order must not be empty")
+    private Integer[] bookSet;
     @NotNull
     private Integer userId;
 }

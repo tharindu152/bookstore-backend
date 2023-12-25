@@ -1,9 +1,12 @@
 package lk.ijse.bookstore.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import lk.ijse.bookstore.dto.OrderDTO;
+import lk.ijse.bookstore.entity.Book;
 import lk.ijse.bookstore.entity.User;
 import lk.ijse.bookstore.repository.BookRepository;
 import lk.ijse.bookstore.repository.UserRepository;
@@ -45,7 +48,9 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrder(OrderDTO orderDTO) {
         User user = userRepository.getUserById(Long.valueOf(orderDTO.getUserId()));
 
-        Order order = new Order(orderDTO.getCreatedAt(), orderDTO.getUpdateAt(), orderDTO.getStatus(), orderDTO.getBookSet(), user);
+        Set<Book> bookSet = createBookSet(orderDTO);
+
+        Order order = new Order(orderDTO.getCreatedAt(), orderDTO.getUpdateAt(), orderDTO.getStatus(), bookSet, user);
         return orderRepository.save(order);
     }
 
@@ -59,8 +64,8 @@ public class OrderServiceImpl implements OrderService {
             existingOrder.setUpdateAt(orderDTO.getUpdateAt());
             existingOrder.setStatus(orderDTO.getStatus());
 
-            // TODO: 2023-12-25 Create ordered book set and add to order
-            existingOrder.setBookSet(orderDTO.getBookSet());
+            Set<Book> bookSet = createBookSet(orderDTO);
+            existingOrder.setBookSet(bookSet);
 
             User user = userRepository.getUserById(Long.valueOf(orderDTO.getUserId()));
             if(user != null){
@@ -87,6 +92,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getOrderByUserId(Long userId) {
         return orderRepository.getOrderByUserId(userId);
+    }
+
+    private Set<Book> createBookSet(OrderDTO orderDTO){
+        Set<Book> bookSet = new HashSet<>();
+        for (int i = 0; i < orderDTO.getBookSet().length; i++) {
+            Book book = bookRepository.findBookById(Long.valueOf(orderDTO.getBookSet()[i]));
+            bookSet.add(book);
+        }
+        return bookSet;
     }
     
 }

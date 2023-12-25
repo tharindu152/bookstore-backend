@@ -16,10 +16,11 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(length = 250, nullable = false)
-    private String description;
     @Column(name = "cat_name", length = 250, nullable = false)
     private String catName;
+    @Column(length = 750, nullable = false)
+    private String description;
+
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -28,7 +29,7 @@ public class Category implements Serializable {
     @Setter(AccessLevel.NONE)
     private Set<SubCategory> subCategorySet;
 
-    public Category( String description, String catName) {
+    public Category( String catName, String description) {
         this.description = description;
         this.catName = catName;
     }

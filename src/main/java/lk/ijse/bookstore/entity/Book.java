@@ -27,7 +27,7 @@ public class Book implements Serializable {
     private int qty;
     @Column(nullable = false)
     private BigDecimal price;
-    @Column(length = 1000, nullable = false)
+    @Column(length = 1500, nullable = false)
     private String description;
     @Column(length = 50)
     private String isbn;

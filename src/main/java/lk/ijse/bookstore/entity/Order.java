@@ -30,6 +30,7 @@ public class Order implements Serializable {
     @JoinTable(name = "order_book",
     joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
+    @JsonBackReference
     private Set<Book> bookSet;
 
     @ManyToOne
