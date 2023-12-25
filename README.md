@@ -11,7 +11,9 @@ The REST API for the mentioned web application was coded using technologies such
 
 - Java
 - Springboot
-- Native Hibernate
+- Hibernate Query Language
+- Hibernate ORM
+- Hibernate Validator
 - Lombok
 - MySQL
 - Firebase Bucket
@@ -19,11 +21,11 @@ The REST API for the mentioned web application was coded using technologies such
 
 Layered Architecture was followed to structure the project.
 
-<img width="800" src="https://github.com/tharindu152/bookstore-backend/blob/master/src/main/resources/img/ER_Digram.png">
+<img width="800" src="https://github.com/tharindu152/bookstore-backend/blob/master/src/main/resources/img/LayeredArchitechture.drawio.svg">
 
 API end points were created to perform CRUD operations on books, users, categories and orders. Displayed below is the ER Diagram used to map the relational databases.
 
-<img width="800" src="https://github.com/tharindu152/bookstore-backend/blob/master/src/main/resources/img/ER_Digram.png">
+<img width="800" src="https://github.com/tharindu152/bookstore-backend/blob/master/src/main/resources/img/bookstore_erd.drawio.png">
 
 ### How to run the application locally
 
