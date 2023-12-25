@@ -46,7 +46,6 @@ public class CategoryController {
 
     @GetMapping(path = "/{id}", produces = "application/json")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id){
-        
         try{
             Category category = categoryService.getCategoryById(id);
             return ResponseEntity.status(HttpStatus.OK).body(category);
@@ -55,7 +54,6 @@ public class CategoryController {
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")

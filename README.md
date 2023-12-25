@@ -10,14 +10,18 @@ This project is created for an online bookstore web application.
 The REST API for the mentioned web application was coded using technologies such as
 
 - Java
-- Spring boot
-- Hibernate
+- Springboot
+- Native Hibernate
 - Lombok
-- JWT tokens
 - MySQL
+- Firebase Bucket
   <br>
 
-Layered Architecture was followed to structure the project. API end points were created to perform CRUD operations on books, users, categories and orders. Displayed below is the ER Diagram used to map the relational databases.
+Layered Architecture was followed to structure the project.
+
+<img width="800" src="https://github.com/tharindu152/bookstore-backend/blob/master/src/main/resources/img/ER_Digram.png">
+
+API end points were created to perform CRUD operations on books, users, categories and orders. Displayed below is the ER Diagram used to map the relational databases.
 
 <img width="800" src="https://github.com/tharindu152/bookstore-backend/blob/master/src/main/resources/img/ER_Digram.png">
 
