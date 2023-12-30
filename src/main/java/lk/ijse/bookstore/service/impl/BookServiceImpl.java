@@ -55,7 +55,7 @@ public class BookServiceImpl implements BookService {
             String coverImageUrl = null;
             if(bookReqDTO.getCoverImage() != null && !bookReqDTO.getCoverImage().isEmpty()){
                 Blob blob = bucket.create(coverImage, bookReqDTO.getCoverImage().getInputStream(), bookReqDTO.getCoverImage().getContentType());
-                coverImageUrl = blob.signUrl(1, TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString();
+                coverImageUrl = blob.signUrl(10, TimeUnit.DAYS, Storage.SignUrlOption.withV4Signature()).toString();
             }else {
                 throw new NoSuchElementException("Book Cover image: " + bookReqDTO.getCoverImage() + " not found");
             }
